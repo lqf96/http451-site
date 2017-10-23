@@ -1,0 +1,11 @@
+# macOS files
+.DS_Store
+._*
+__MACOSX
+
+# Node modules
+node_modules
+# Developement build files
+build
+# Distribution build files
+dist
