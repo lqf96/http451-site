@@ -8,9 +8,11 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
     <!-- Title -->
     <title><%= options.title %></title>
+    <!-- Redirect to SPA entry page -->
+    <script>
+    location.href = "/#!"+location.pathname+location.search+location.hash;
+    </script>
 </head>
 <body>
-    <!-- Root component -->
-    <div id="root">Loading...</div>
 </body>
 </html>

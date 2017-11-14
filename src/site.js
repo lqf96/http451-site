@@ -3,10 +3,6 @@ import VueRouter from "vue-router";
 import BootstrapVue from "bootstrap-vue";
 
 import Root from "./layout/root.vue";
-import UnderConstruction from "./views/uc.vue";
-import NotFound from "./views/404.vue";
-
-import AboutMe from "./views/about.vue";
 
 import {hash_upgrade} from "./util/routing.js";
 
@@ -17,12 +13,12 @@ Vue.use(BootstrapVue);
 let router = window.router = new VueRouter({
     mode: "history",
     routes: [
-        {path: "/", component: UnderConstruction},
-        {path: "/services", component: UnderConstruction},
-        {path: "/projects", component: UnderConstruction},
-        {path: "/blogs", component: UnderConstruction},
-        {path: "/about", component: AboutMe},
-        {path: "/*", component: NotFound}
+        {path: "/", component: () => import("./views/uc.vue")},
+        {path: "/services", component: () => import("./views/uc.vue")},
+        {path: "/projects", component: () => import("./views/uc.vue")},
+        {path: "/blogs", component: () => import("./views/uc.vue")},
+        {path: "/about", component: () => import("./views/about.vue")},
+        {path: "/*", component: () => import("./views/404.vue")}
     ]
 });
 

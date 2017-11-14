@@ -1,4 +1,5 @@
 <template>
+<!-- Footer -->
 <footer class="bg-light text-muted">
     <b-container>
         <div class="d-flex flex-column flex-sm-row">
@@ -15,9 +16,5 @@
 footer {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-}
-
-.footer-view-source {
-    text-align: right;
 }
 </style>

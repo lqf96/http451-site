@@ -12,15 +12,11 @@
 </template>
 
 <style>
-.navbar-nav .fa {
-    width: 1.25rem;
-    text-align: center;
-}
 </style>
 
 <style scoped>
 .main-area {
-    margin-top: 4rem;
+    margin-top: 3.5rem;
 }
 </style>
 

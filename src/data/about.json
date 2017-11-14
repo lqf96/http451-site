@@ -1,0 +1,89 @@
+{
+    "meta": {
+        "projects": {
+            "url": {
+                "github": "https://github.com/lqf96",
+                "gitlab": "https://gitlab.com/lqf96"
+            }
+        }
+    },
+    "projects": [
+        {
+            "title": "u-RPC",
+            "simple_desc": "The u-RPC Remote Procedure Call (RPC) framework",
+            "desc": "Easy-to-use RPC framework for embedded devices.",
+            "links": [
+                {
+                    "site": "github",
+                    "repo": "u-rpc"
+                }
+            ]
+        },
+        {
+            "title": "WISP ERT",
+            "simple_desc": "The WISP Extended Runtime",
+            "desc": "Extends WISP with reliable data transmission and remote file manipulation functionality.",
+            "links": [
+                {
+                    "site": "github",
+                    "repo": "wisp-ert"
+                }
+            ]
+        },
+        {
+            "title": "Libasync",
+            "desc": "Cross-platform, concurrent, modern C++ framework for network programming.",
+            "links": [
+                {
+                    "site": "github",
+                    "repo": "libasync"
+                }
+            ]
+        },
+        {
+            "title": "MLisp",
+            "simple_desc": "The MLisp Programming Language, Compiler and Interpreter",
+            "desc": "A Lisp dialect bytecode interpreter and compiler implemented in Haskell.",
+            "links": [
+                {
+                    "site": "gitlab",
+                    "repo": "mlisp"
+                }
+            ]
+        },
+        {
+            "title": "MiniFTP",
+            "simple_desc": "MiniFTP Demo FTP Server and Graphical Client",
+            "desc": "Demo FTP client and server powered by libasync.",
+            "links": [
+                {
+                    "display": "Server code",
+                    "site": "gitlab",
+                    "repo": "miniftpd"
+                },
+                {
+                    "display": "Client code",
+                    "site": "gitlab",
+                    "repo": "miniftp"
+                }
+            ]
+        },
+        {
+            "title": "Xv6 Extra",
+            "simple_desc": "The Xv6 enhancement project",
+            "desc": "POSIX socket API and Unix Domain Socket functionality for xv6.",
+            "links": [
+                {
+                    "display": "Xv6 code",
+                    "site": "gitlab",
+                    "repo": "xv6"
+                },
+                {
+                    "display": "Out-of-kernel code",
+                    "site": "gitlab",
+                    "repo": "xv6-extra"
+                }
+            ]
+        }
+    ]
+}

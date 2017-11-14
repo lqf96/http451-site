@@ -24,11 +24,17 @@
                 </b-nav-item>
                 <!-- About me -->
                 <b-nav-item to="/about">
-                    <i class="fa fa-male d-sm-none" />
-                    About
+                    <i class="fa fa-male d-sm-none" /> About
                 </b-nav-item>
             </b-nav>
         </b-collapse>
     </b-container>
 </b-navbar>
 </template>
+
+<style scoped>
+.navbar-nav .fa {
+    width: 1.25rem;
+    text-align: center;
+}
+</style>
