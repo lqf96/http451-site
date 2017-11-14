@@ -6,7 +6,7 @@
 # SPA redirect
 [[redirects]]
     from = "/*"
-    to = ""
+    to = "/200.html"
     status = 200
 
 # Netlify subdomain redirect (HTTP)
