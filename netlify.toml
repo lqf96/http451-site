@@ -1,0 +1,24 @@
+# Build command
+[build]
+    publish = "dist"
+    command = "npm run build-prod"
+
+# SPA redirect
+[[redirects]]
+    from = "/*"
+    to = ""
+    status = 200
+
+# Netlify subdomain redirect (HTTP)
+[[redirects]]
+    from = "http://http451.netlify.com/*"
+    to = "https://http451.me/:splat"
+    status = 301
+    force = true
+
+# Netlify subdomain redirect (HTTPS)
+[[redirects]]
+    from = "https://http451.netlify.com/*"
+    to = "https://http451.me/:splat"
+    status = 301
+    force = true

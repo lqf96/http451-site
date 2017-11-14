@@ -1,13 +1,17 @@
+//Utility libraries
 var path = require("path");
 var _ = require("lodash");
+//Webpack
 var webpack = require("webpack");
+//Webpack plugins
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+var WebpackCdnPlugin = require("webpack-cdn-plugin");
 
 //Build mode
 var mode = (process.env["NODE_ENV"]||"dev").toLowerCase();
 
-//Mode-specific meta configuration
-var meta_mode_config = {
+//Meta mode-specific configuration
+let meta_mode_config = {
     //Development mode
     dev: {
         //Build directory
@@ -20,18 +24,11 @@ var meta_mode_config = {
 };
 
 //Webpack base configuration
-var webpack_base_config = {
+let webpack_base_config = {
     //Webpack bundle entries
     entry: {
         //Site
         "site": path.resolve(__dirname, "src/site.js"),
-    },
-    //External dependencies
-    externals: {
-        "lodash": "_",
-        "vue": "Vue",
-        "vue-router": "VueRouter",
-        "bootstrap-vue": "window['bootstrap-vue']"
     },
     //Modules
     module: {
@@ -49,9 +46,9 @@ var webpack_base_config = {
                 loader: "babel-loader",
                 exclude: /node_modules/,
                 options: {
-                    presets: ["env"],
-                    plugins: [
-                        "syntax-dynamic-import"
+                    presets: [
+                        "env",
+                        "stage-2"
                     ]
                 }
             }
@@ -66,14 +63,78 @@ var webpack_base_config = {
     },
     //Plugins
     plugins: [
-        //Site index HTML page
+        //SPA entry page
         new HtmlWebpackPlugin({
             chunks: ["site"],
             filename: path.resolve(__dirname, meta_mode_config[mode].build_dir, "index.html"),
             template: path.resolve(__dirname, "src/index.html"),
             title: "HTTP 451"
+        }),
+        //SPA redirect page
+        new HtmlWebpackPlugin({
+            chunks: [],
+            filename: path.resolve(__dirname, meta_mode_config[mode].build_dir, "200.html"),
+            template: path.resolve(__dirname, "src/200.html"),
+            title: "HTTP 451"
+        }),
+        //CDN resources
+        new WebpackCdnPlugin({
+            prodUrl: "https://cdn.jsdelivr.net/npm/:name@:version/:path",
+            modules: [
+                //Bootstrap
+                {
+                    name: "bootstrap",
+                    style: "dist/css/bootstrap.min.css",
+                    cssOnly: true
+                },
+                //Font Awesome
+                {
+                    name: "font-awesome",
+                    style: "css/font-awesome.min.css",
+                    cssOnly: true
+                },
+                //Core JS
+                {
+                    name: "core-js",
+                    path: "client/core.min.js",
+                    var: "null"
+                },
+                //Lodash
+                {
+                    name: "lodash",
+                    path: "lodash.min.js",
+                    var: "_"
+                },
+                //Vue
+                {
+                    name: "vue",
+                    path: "dist/vue.runtime.min.js",
+                    var: "Vue"
+                },
+                //Vue Router
+                {
+                    name: "vue-router",
+                    path: "dist/vue-router.min.js",
+                    var: "VueRouter"
+                },
+                //Bootstrap Vue
+                {
+                    name: "bootstrap-vue",
+                    path: "dist/bootstrap-vue.min.js",
+                    style: "dist/bootstrap-vue.css",
+                    var: "window['bootstrap-vue']"
+                }
+            ]
         })
     ],
+    //Resolve settings
+    resolve: {
+        //Search path
+        modules: [
+            path.resolve(__dirname, "src"),
+            path.resolve("node_modules")
+        ]
+    },
     //Build target
     target: "web"
 };
@@ -86,7 +147,7 @@ var webpack_mode_config = {
         devtool: "source-map",
         //Build output
         output: {
-            //Bundle name
+            //Chunk filename
             filename: "[name].js"
         },
     },
@@ -94,7 +155,7 @@ var webpack_mode_config = {
     production: {
         //Build output
         output: {
-            //Bundle name
+            //Chunk filename
             filename: "[name].[chunkhash].js"
         },
         //Plugins
@@ -105,15 +166,16 @@ var webpack_mode_config = {
     }
 };
 
-function customizer(objValue, srcValue) {
-  if (_.isArray(objValue)) {
-    return objValue.concat(srcValue);
-  }
+//Merge customizer
+function merge_customizer(target, source) {
+    //Concatenate instead of replace array
+    if (_.isArray(target))
+        return target.concat(source);
 }
 
 //Merge and export Webpack configuration
 module.exports = _.mergeWith(
     webpack_base_config,
     webpack_mode_config[mode],
-    customizer
+    merge_customizer
 );
